@@ -8,7 +8,7 @@ export default function (state = initialState.settings, action) {
         loading: false,
         name: action.settings.name,
         logo_url: action.settings.logo_url,
-        maintainance: action.settings.maintainance,
+        maintenance: action.settings.maintenance,
       };
     default:
       return state;

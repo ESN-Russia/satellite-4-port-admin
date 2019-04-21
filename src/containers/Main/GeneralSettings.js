@@ -9,7 +9,7 @@ class GeneralSettings extends Component {
 
     const { settings } = nextProps;
     this.state = {
-      currentMaintainance: settings.maintainance,
+      currentMaintenance: settings.maintenance,
       currentName: settings.name,
       currentLogoUrl: settings.logo_url,
     };
@@ -17,7 +17,7 @@ class GeneralSettings extends Component {
 
   GetDerivedStateFromProps({ settings }, oldState) {
     return {
-      currentMaintainance: settings.maintainance,
+      currentMaintenance: settings.maintenance,
       currentName: settings.name,
       currentLogoUrl: settings.logo_url,
     };
@@ -30,7 +30,7 @@ class GeneralSettings extends Component {
     } = this;
 
     return (
-      settings.maintainance !== currentSettings.currentMaintainance ||
+      settings.maintenance !== currentSettings.currentMaintenance ||
       settings.name !== currentSettings.currentName ||
       settings.logo_url !== currentSettings.currentLogoUrl
     );
@@ -39,14 +39,14 @@ class GeneralSettings extends Component {
   resetChanges() {
     const { settings } = this.props;
     this.setState({
-      currentMaintainance: settings.maintainance,
+      currentMaintenance: settings.maintenance,
       currentName: settings.name,
       currentLogoUrl: settings.logo_url,
     });
   }
 
   render() {
-    const { currentName, currentMaintainance, currentLogoUrl } = this.state;
+    const { currentName, currentMaintenance, currentLogoUrl } = this.state;
     const haveChanges = this.haveChanges();
 
     return (
@@ -54,9 +54,9 @@ class GeneralSettings extends Component {
         <Header size="h1">General settings</Header>
         <Form>
           <Form.Checkbox
-            checked={currentMaintainance}
-            onChange={(e, { checked }) => this.setState({ currentMaintainance: checked })}
-            label="Is under maintainance"
+            checked={currentMaintenance}
+            onChange={(e, { checked }) => this.setState({ currentMaintenance: checked })}
+            label="Is under maintenance"
           />
           <Form.Input
             label="Section name"

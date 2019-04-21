@@ -120,7 +120,7 @@ Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)
 A component by [Espen Hovlandsdal](https://espen.codes/)`,
   },
   settings: {
-    maintainance: true,
+    maintenance: true,
     loading: false,
     name: "ESN Russia",
     logo_url: "/RU-DIGITAL-COLOR.png",
