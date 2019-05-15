@@ -1,19 +1,13 @@
 import { combineReducers } from "redux";
 
-import menuItems from "./menuItemsReducer";
-import pages from "./pagesReducer";
-import aboutReducer from "./aboutReducer";
-import boardsReducer from "./boardsReducer";
-import settingsReducer from "./settingsReducer";
+import dataReducer from "./dataReducer";
 import modalReducer from "./modalReducer";
+import loadingReducer from "./loadingReducer";
 
 const combinedReducer = combineReducers({
-  menuItems,
-  pages,
-  boards: boardsReducer,
-  about: aboutReducer,
-  settings: settingsReducer,
+  data: dataReducer,
   modalState: modalReducer,
+  loading: loadingReducer,
 });
 
 const rootReducer = (state, action) => combinedReducer(state, action);

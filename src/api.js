@@ -6,65 +6,36 @@ const SERVER_URL =
 const getUrl = uri => `${SERVER_URL}${uri}`;
 
 const apiGet = uri => axios.get(getUrl(uri));
+const apiPost = (uri, payload) => axios.post(getUrl(uri), payload);
 
 const getData = async () => {
   await apiGet("getData").then((res) => {
     console.log("[getData] Success =", res);
     window.store.dispatch({
       type: "GET_DATA",
-      menuItems: res.data.menu_items,
-      settings: res.data.settings,
-      about: res.data.about,
-      boards: res.data.boards,
-      pages: res.data.boards,
+      data: res.data,
     });
   });
 };
 
-const getMenuItems = async () => {
-  await apiGet("getMenuItems").then((res) => {
-    console.log("[getMenuItems] Success =", res);
-    window.store.dispatch({
-      type: "GET_MENU_ITEMS",
-      menuItems: res.data,
-    });
+const updateData = async (updatePatch) => {
+  window.store.dispatch({
+    type: "SET_LOADING",
   });
-};
-
-const getAboutPage = async () => {
-  await apiGet("getAboutPage").then((res) => {
-    console.log("[getAboutPage] Success =", res);
+  const { data } = window.store.getState();
+  console.log(data);
+  console.log(updatePatch);
+  console.log({ ...data, ...updatePatch });
+  await apiPost("updateData", { ...data, ...updatePatch }).then((res) => {
+    console.log("[updateData] Success =", res);
     window.store.dispatch({
-      type: "GET_ABOUT",
-      about: res.data,
-    });
-  });
-};
-
-const getBoards = async () => {
-  await apiGet("getBoards").then((res) => {
-    console.log("[getBoards] Success =", res);
-    window.store.dispatch({
-      type: "GET_BOARDS",
-      boards: res.data,
-    });
-  });
-};
-
-const getPages = async () => {
-  await apiGet("getPages").then((res) => {
-    console.log("[getPages] Success =", res);
-    window.store.dispatch({
-      type: "GET_PAGES",
-      pages: res.data,
+      type: "GET_DATA",
+      data: res.data,
     });
   });
 };
 
 export default {
-  getMenuItems,
-  getAboutPage,
-  getBoards,
-  getPages,
   getData,
+  updateData,
 };

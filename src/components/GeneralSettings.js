@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Segment, Header, Form, Image } from "semantic-ui-react";
+import api from "../api";
 
 class GeneralSettings extends Component {
   constructor(nextProps) {
@@ -23,7 +24,7 @@ class GeneralSettings extends Component {
     };
   }
 
-  haveChanges() {
+  haveChanges = () => {
     const {
       props: { settings },
       state: currentSettings,
@@ -34,16 +35,27 @@ class GeneralSettings extends Component {
       settings.name !== currentSettings.currentName ||
       settings.logo_url !== currentSettings.currentLogoUrl
     );
-  }
+  };
 
-  resetChanges() {
+  resetChanges = () => {
     const { settings } = this.props;
     this.setState({
       currentMaintenance: settings.maintenance,
       currentName: settings.name,
       currentLogoUrl: settings.logo_url,
     });
-  }
+  };
+
+  saveChanges = async () => {
+    const { currentMaintenance, currentName, currentLogoUrl } = this.state;
+    await api.updateData({
+      settings: {
+        maintenance: currentMaintenance,
+        name: currentName,
+        logo_url: currentLogoUrl,
+      },
+    });
+  };
 
   render() {
     const { currentName, currentMaintenance, currentLogoUrl } = this.state;
@@ -51,7 +63,7 @@ class GeneralSettings extends Component {
 
     return (
       <Segment padded style={{ marginTop: 10 }}>
-        <Header size="h1">General settings</Header>
+        <Header size="large">General settings</Header>
         <Form>
           <Form.Checkbox
             checked={currentMaintenance}
@@ -72,7 +84,7 @@ class GeneralSettings extends Component {
             <Image src={currentLogoUrl} avatar />
           </Form.Group>
           <Form.Group inline>
-            <Form.Button color="green" disabled={!haveChanges}>
+            <Form.Button color="green" disabled={!haveChanges} onClick={() => this.saveChanges()}>
               Save
             </Form.Button>
             <Form.Button disabled={!haveChanges} onClick={() => this.resetChanges()}>
@@ -85,6 +97,6 @@ class GeneralSettings extends Component {
   }
 }
 
-const mapStateToProps = ({ settings }) => ({ settings });
+const mapStateToProps = ({ data }) => data;
 
 export default connect(mapStateToProps)(GeneralSettings);

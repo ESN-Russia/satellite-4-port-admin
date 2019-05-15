@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import _ from "lodash";
-import { Segment, Header, List, Modal, Icon, Button } from "semantic-ui-react";
+import { Segment, Header, List } from "semantic-ui-react";
 
 class MenuSettings extends Component {
-  state = { loading: false, modalIsOpen: false };
+  state = { loading: false };
 
   render() {
     const { menuItems } = this.props;
-    const { loading, modalIsOpen } = this.state;
+    const { loading } = this.state;
     return (
       <Segment loading={loading}>
-        <Header size="h1">Menu settings</Header>
+        <Header size="large">Menu settings</Header>
 
         <List divided>
           {_.map(menuItems, item => (
@@ -26,6 +26,7 @@ class MenuSettings extends Component {
               }
               header={item.title}
               description={item.url}
+              key={`keykey_${item.url}`}
             />
           ))}
         </List>
@@ -34,6 +35,6 @@ class MenuSettings extends Component {
   }
 }
 
-const mapStateToProps = ({ menuItems }) => ({ menuItems });
+const mapStateToProps = ({ data }) => ({ menuItems: data.menu_items });
 
 export default connect(mapStateToProps)(MenuSettings);

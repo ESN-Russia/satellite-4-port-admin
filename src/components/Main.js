@@ -1,18 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-import _ from "lodash";
-
-import {
-  Container,
-  Segment,
-  Header,
-  Message,
-  Button,
-  Form,
-  Image,
-  Divider,
-} from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import GeneralSettings from "./GeneralSettings";
 import MenuSettings from "./MenuSettings";
 import EditorModal from "./EditorModal";
@@ -30,6 +19,6 @@ const Main = ({ settings, menuItems }) => (
   </Container>
 );
 
-const mapStateToProps = ({ settings, menuItems }) => ({ settings, menuItems });
+const mapStateToProps = ({ data }) => data;
 
 export default connect(mapStateToProps)(Main);

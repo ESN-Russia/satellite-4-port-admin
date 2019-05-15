@@ -37,9 +37,9 @@ class EditorModal extends Component {
   }
 }
 
-const mapStateToProps = ({ modalState, pages }) => ({
+const mapStateToProps = ({ modalState, data }) => ({
   modalState,
-  page: pages[modalState.pageUrl],
+  page: data.pages[modalState.pageUrl],
 });
 
 export default connect(mapStateToProps)(EditorModal);
