@@ -1,4 +1,9 @@
 export default {
+  loggedIn: {
+    status: false,
+    loading: true,
+    username: "",
+  },
   loading: true,
   data: {
     settings: {
